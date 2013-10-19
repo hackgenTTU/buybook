@@ -36,13 +36,16 @@
             $realname = trim($realname);
 
             if(!$this->checkStrLen($passwd,6,40)){
-                return '密碼太短，需要6~40字';
+                throw new Exception('密碼太短，需要6~40字');
+                return 0;
             }
             if(!$this->checkStrLen($usernm,4,100)){
-                return '帳號太短，請至少輸入4字元';
+                throw new Exception('帳號太短，請至少輸入4字元');
+                return 0;
             }
             if($usernm == '' OR $realname == '' OR $passwd == ''){
-                return '帳號、密碼或真實姓名其中一項未輸入';
+                throw new Exception('帳號、密碼或真實姓名其中一項未輸入');
+                return 0;
             }else{
                 if(!$this->checkUsernmExist($usernm)){
                     if($passwd == $re_passwd){
@@ -58,10 +61,12 @@
                         $result = $sth->fetch(PDO::FETCH_ASSOC);
                         return $result['uid'];
                     }else{
-                        return '兩次密碼輸入不同';
+                        throw new Exception('兩次密碼輸入不同');
+                        return 0;
                     }
                 }else{
-                    return '此用戶名稱已存在';
+                    throw new Exception('此用戶名稱已存在');
+                    return 0;
                 }
             }
         }
@@ -73,6 +78,7 @@
                     return 0;
                 }
             }else{
+
                 return 0;
             }
         }
@@ -88,13 +94,15 @@
                         ':code'=>$code,
                         ':created_at'=>date('Y-m-d G:i:s',time())
                     ));    
-                    return '已寄出信件，請輸入驗證碼';    
+                    return 1;    
                 }else{
-                    return '信箱格式錯誤';
+                    throw new Exception('信箱格式錯誤');
+                    return 0;
                 }
 
             }else{
-                return '不存在此用戶';
+                throw new Exception('不存在此用戶');
+                return 0;
             }
             
         }
@@ -103,7 +111,8 @@
             $sth->execute(array(':code'=>$verification_code));
             $result = $sth->fetch(PDO::FETCH_ASSOC);
             if(!$result){
-                return '驗證碼錯誤';
+                throw new Exception('驗證碼錯誤');
+                return 0;
             }else{
                 try{
                     $this->db->beginTransaction();
@@ -117,10 +126,11 @@
                     $sth->execute(array(':code'=>$verification_code));
 
                     $this->db->commit();
-                    return '已認證信箱';
+                    return 1;
                 }catch(Exception $e){
                     $this->db->rollback();
-                    return 'error';
+
+                    return 0;
                 }
                 
             }
@@ -140,7 +150,8 @@
             ));
             $result = $sth->fetch(PDO::FETCH_ASSOC);
             if(!$result){
-                return '不存在此用戶';
+                throw new Exception('不存在此用戶');
+                return 0;
             }else{
                 return json_encode($result);    
             }
@@ -179,10 +190,14 @@
         public function login($usernm, $passwd){
             $cur_passwd = $this->getUserPwd($usernm);
             if(!$cur_passwd){
-                return '不存在此用戶';
+                
+                throw new Exception('不存在此用戶');
+                return 0;
             }else{
                 if($this->hash($passwd) != $cur_passwd){
-                    return '密碼錯誤';
+                    throw new Exception('密碼錯誤');
+                    
+                    return 0;
                 }else{
                     return getUserData($this->usernm2uid($usernm));
                 }
