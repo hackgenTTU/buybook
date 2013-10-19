@@ -3,5 +3,5 @@
     include('load_module.php');
 
     $user = new User($db);
-    var_dump($user->addUser('哈囉','abc','abc','XDDDDDDD'));
+    var_dump($user->addUser('aaaaaa','abcabc','abcabc','林熙'));
 ?>
