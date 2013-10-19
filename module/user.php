@@ -53,7 +53,10 @@
                             ':realname'=>$realname,
                             ':created_at'=>date('Y/m/d G:i',time()),
                         ));
-                        return '已建立用戶';
+                        $sth = $this->db->prepare('select `uid` from `users` where `usernm`=:usernm');
+                        $sth->execute(array(':usernm'=>$usernm));
+                        $result = $sth->fetch(PDO::FETCH_ASSOC);
+                        return $result['uid'];
                     }else{
                         return '兩次密碼輸入不同';
                     }

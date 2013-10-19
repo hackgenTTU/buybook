@@ -3,5 +3,5 @@
     include('load_module.php');
 
     $user = new User($db);
-
+    
 ?>
