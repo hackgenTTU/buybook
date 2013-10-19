@@ -13,9 +13,12 @@
             return $result;
 
         }
-        public function getBookListByUID($uid){
-            $sth = $this->db->prepare('select * from `booklist` where `uid`=:uid');
-            $sth->execute(array(':uid'=>$uid));
+        public function getBookListByUID($uid, $start, $end){
+            $sth = $this->db->prepare('select * from `booklist` where `uid`=:uid limit :start, :end');
+            $sth->bindValue(':start',$start,PDO::PARAM_INT);
+            $sth->bindValue(':end',$end,PDO::PARAM_INT);
+            $sth->bindValue(':uid',$uid);
+            $sth->execute();
             $result = $sth->fetchAll(PDO::FETCH_ASSOC);
             return $result;
         }

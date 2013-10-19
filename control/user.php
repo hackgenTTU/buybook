@@ -4,7 +4,7 @@
 
     $book = new Book($db);
 
-    var_dump($book->paid_money(3,100));
+    var_dump($book->getBookListByUID(15,11,20));
     /*var_dump($book->addBookList('聽風的書單11','測試用的書單',15,'2014/10/10',array(
         array(
             'name'=>'Applied Cal1',
