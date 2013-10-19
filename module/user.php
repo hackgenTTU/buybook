@@ -87,7 +87,7 @@
 
             if($this->checkUidExist($uid)){
                 if(filter_var($email,FILTER_VALIDATE_EMAIL)){
-                    $code = md5(date('Y/m/d G:i:s',time()) . $uid . $email);
+                    $code = md5(date('Y-m-d G:i:s',time()) . $uid . $email);
                     $sth->execute(array(
                         ':uid'=>$uid,
                         ':email'=>$email,
@@ -153,7 +153,7 @@
                 throw new Exception('不存在此用戶');
                 return 0;
             }else{
-                return json_encode($result);    
+                return $result;    
             }
             
         }
@@ -187,6 +187,7 @@
             $result = $sth->fetch(PDO::FETCH_ASSOC);
             return $result['uid'];
         }
+        
         public function login($usernm, $passwd){
             $cur_passwd = $this->getUserPwd($usernm);
             if(!$cur_passwd){
