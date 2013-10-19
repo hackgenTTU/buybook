@@ -49,11 +49,7 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
 
   // http://blog.alexmaccaw.com/css-transitions
   $.fn.emulateTransitionEnd = function (duration) {
-<<<<<<< HEAD
-    var called = false, $el    = this
-=======
     var called = false, $el = this
->>>>>>> a125c070b88e1279288cce33935d8dd9afbcd3bd
     $(this).one($.support.transition.end, function () { called = true })
     var callback = function () { if (!called) $($el).trigger($.support.transition.end) }
     setTimeout(callback, duration)
@@ -715,11 +711,7 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
     clearMenus()
 
     if (!isActive) {
-<<<<<<< HEAD
-      if ('ontouchstart' in document.documentElement) {
-=======
       if ('ontouchstart' in document.documentElement && !$parent.closest('.navbar-nav').length) {
->>>>>>> a125c070b88e1279288cce33935d8dd9afbcd3bd
         // if mobile we we use a backdrop because click events don't delegate
         $('<div class="dropdown-backdrop"/>').insertAfter($(this)).on('click', clearMenus)
       }
@@ -731,15 +723,9 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
       $parent
         .toggleClass('open')
         .trigger('shown.bs.dropdown')
-<<<<<<< HEAD
-    }
-
-    $this.focus()
-=======
 
       $this.focus()
     }
->>>>>>> a125c070b88e1279288cce33935d8dd9afbcd3bd
 
     return false
   }
@@ -865,11 +851,7 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
 
   var Modal = function (element, options) {
     this.options   = options
-<<<<<<< HEAD
-    this.$element  = $(element).on('click.dismiss.modal', '[data-dismiss="modal"]', $.proxy(this.hide, this))
-=======
     this.$element  = $(element)
->>>>>>> a125c070b88e1279288cce33935d8dd9afbcd3bd
     this.$backdrop =
     this.isShown   = null
 
@@ -898,11 +880,8 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
 
     this.escape()
 
-<<<<<<< HEAD
-=======
     this.$element.on('click.dismiss.modal', '[data-dismiss="modal"]', $.proxy(this.hide, this))
 
->>>>>>> a125c070b88e1279288cce33935d8dd9afbcd3bd
     this.backdrop(function () {
       var transition = $.support.transition && that.$element.hasClass('fade')
 
@@ -925,11 +904,7 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
       var e = $.Event('shown.bs.modal', { relatedTarget: _relatedTarget })
 
       transition ?
-<<<<<<< HEAD
-        that.$element
-=======
         that.$element.find('.modal-dialog') // wait for modal to slide in
->>>>>>> a125c070b88e1279288cce33935d8dd9afbcd3bd
           .one($.support.transition.end, function () {
             that.$element.focus().trigger(e)
           })
@@ -1091,11 +1066,7 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
   })
 
   $(document)
-<<<<<<< HEAD
-    .on('shown.bs.modal',  '.modal', function () { $(document.body).addClass('modal-open') })
-=======
     .on('show.bs.modal',  '.modal', function () { $(document.body).addClass('modal-open') })
->>>>>>> a125c070b88e1279288cce33935d8dd9afbcd3bd
     .on('hidden.bs.modal', '.modal', function () { $(document.body).removeClass('modal-open') })
 
 }(window.jQuery);
@@ -1210,18 +1181,11 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
 
     clearTimeout(self.timeout)
 
-<<<<<<< HEAD
-    if (!self.options.delay || !self.options.delay.show) return self.show()
-
-    self.hoverState = 'in'
-    self.timeout    = setTimeout(function () {
-=======
     self.hoverState = 'in'
 
     if (!self.options.delay || !self.options.delay.show) return self.show()
 
     self.timeout = setTimeout(function () {
->>>>>>> a125c070b88e1279288cce33935d8dd9afbcd3bd
       if (self.hoverState == 'in') self.show()
     }, self.options.delay.show)
   }
@@ -1232,18 +1196,11 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
 
     clearTimeout(self.timeout)
 
-<<<<<<< HEAD
-    if (!self.options.delay || !self.options.delay.hide) return self.hide()
-
-    self.hoverState = 'out'
-    self.timeout    = setTimeout(function () {
-=======
     self.hoverState = 'out'
 
     if (!self.options.delay || !self.options.delay.hide) return self.hide()
 
     self.timeout = setTimeout(function () {
->>>>>>> a125c070b88e1279288cce33935d8dd9afbcd3bd
       if (self.hoverState == 'out') self.hide()
     }, self.options.delay.hide)
   }
@@ -1376,13 +1333,9 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
     var $tip = this.tip()
     var e    = $.Event('hide.bs.' + this.type)
 
-<<<<<<< HEAD
-    function complete() { $tip.detach() }
-=======
     function complete() {
       if (that.hoverState != 'in') $tip.detach()
     }
->>>>>>> a125c070b88e1279288cce33935d8dd9afbcd3bd
 
     this.$element.trigger(e)
 

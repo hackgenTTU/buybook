@@ -1,5 +1,6 @@
 <?php
     include('sql.php');
+<<<<<<< HEAD
     include('load_module.php');
 
     $book = new Book($db);
@@ -30,4 +31,10 @@
         )
     )));*/
 
+=======
+    include('load_model.php');
+
+    $user = new User($db);
+    
+>>>>>>> a125c070b88e1279288cce33935d8dd9afbcd3bd
 ?>
