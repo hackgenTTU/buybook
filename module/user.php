@@ -70,10 +70,10 @@
                 if(strlen($str) <= $max){
                     return 1;
                 }else{
-                    return '字數超過';
+                    return 0;
                 }
             }else{
-                return '字數不足';
+                return 0;
             }
         }
         public function sendEmail($uid, $email){
