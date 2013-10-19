@@ -51,7 +51,7 @@
                             ':usernm'=>$usernm,
                             ':password'=>$this->hash($passwd),
                             ':realname'=>$realname,
-                            ':created_at'=>date('Y/m/d G:i',time()),
+                            ':created_at'=>date('Y-m-d G:i:s',time()),
                         ));
                         $sth = $this->db->prepare('select `uid` from `users` where `usernm`=:usernm');
                         $sth->execute(array(':usernm'=>$usernm));
@@ -86,7 +86,7 @@
                         ':uid'=>$uid,
                         ':email'=>$email,
                         ':code'=>$code,
-                        ':created_at'=>date('Y/m/d G:i:s',time())
+                        ':created_at'=>date('Y-m-d G:i:s',time())
                     ));    
                     return '已寄出信件，請輸入驗證碼';    
                 }else{
@@ -170,6 +170,12 @@
         public function setUserPwd(){
 
         }
+        public function usernm2uid($usernm){
+            $sth = $this->db->prepare('select `uid` from `users` where `usernm`=:usernm');
+            $sth->execute(array(':usernm'=>$usernm));
+            $result = $sth->fetch(PDO::FETCH_ASSOC);
+            return $result['uid'];
+        }
         public function login($usernm, $passwd){
             $cur_passwd = $this->getUserPwd($usernm);
             if(!$cur_passwd){
@@ -178,7 +184,7 @@
                 if($this->hash($passwd) != $cur_passwd){
                     return '密碼錯誤';
                 }else{
-                    return 1;
+                    return getUserData($this->usernm2uid($usernm));
                 }
             }
 
