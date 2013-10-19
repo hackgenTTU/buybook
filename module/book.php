@@ -43,39 +43,37 @@
             }
             
         }
-        public function addBookList($bl_name, $bl_desc, $uid, $book_data = array()){
-            if($bl_name == '' OR $bl_desc == '' OR $uid =='' OR $book_data == array()){
-                throw new Exception("缺少參數");
-                return 0;
-            }else{
-                if($this->checkUidExist($uid)){
-                    $sth = $this->db->prepare('insert into `booklist`(`blist_name`,`blist_desc`,`uid`,`created_at`, `status`)values(:bl_name, :bl_desc, :uid, :created_at, "open")');
+        public function addBookList($bl_name, $bl_desc, $uid, $deadline, $book_data = array()){
+            
+            if($this->checkUidExist($uid)){
+                $sth = $this->db->prepare('insert into `booklist`(`blist_name`,`blist_desc`,`uid`,`created_at`, `status`, `deadline`)values(:bl_name, :bl_desc, :uid, :created_at, "open", :deadline)');
+                $sth->execute(array(
+                    ':bl_name'=>trim($bl_name),
+                    ':bl_desc'=>trim($bl_desc),
+                    ':uid'=>$uid,
+                    ':created_at'=>date('Y-m-d G:i:s',time()),
+                    ':deadline'=>$deadline
+                ));
+                $blid = $this->db->lastInsertId();
+                $bid_array = array();
+                foreach ($book_data as $book) {
+                    $sth = $this->db->prepare('insert into `books`(`blid`, `book_name`, `book_author`, `isbn`, `price`, `publisher`) values (:blid, :book_name, :book_author, :isbn, :price, :publisher)');
                     $sth->execute(array(
-                        'bl_name'=>trim($bl_name),
-                        'bl_desc'=>trim($bl_desc),
-                        'uid'=>$uid,
-                        'created_at'=>date('Y-m-d G:i:s',time())
+                        ':blid'=>$blid,
+                        ':book_name'=>$book['name'],
+                        ':book_author'=>$book['author'],
+                        ':isbn'=>$book['isbn'],
+                        ':price'=>$book['price'],
+                        ':publisher'=>$book['publisher']
                     ));
-                    $blid = $this->db->lastInsertId();
-                    $bid_array = array();
-                    foreach ($book_data as $book) {
-                        $sth = $this->db->prepare('insert into `books`(`blid`, `book_name`, `book_author`, `isbn`, `price`, `publisher`) values (:blid, :book_name, :book_author, :isbn, :price, :publisher) ');
-                        $sth->execute(array(
-                            ':blid'=>$blid,
-                            ':book_name'=>$book['name'],
-                            ':book_author'=>$book['author'],
-                            ':isbn'=>$book['isbn'],
-                            ':price'=>$book['price'],
-                            ':publisher'=>$book['publisher']
-                        ));
-                        array_push($bid_array, $this->db->lastInsertId());
-                    }
-                    return $bid_array;
-                }else{
-                    throw new Exception("此用戶不存在");
-                    return 0;  
+                    array_push($bid_array, $this->db->lastInsertId());
                 }
+                return $bid_array;
+            }else{
+                throw new Exception("此用戶不存在");
+                return 0;  
             }
+            
         }
         public function editBookList(){
 
@@ -163,11 +161,14 @@
                 $temp = $sth->fetchAll(PDO::FETCH_ASSOC);
                 $result = array();
                 foreach ($temp as $row) {
+
                     $bl_name = $this->getBookListInfo($blid);
                     $bl_name = $bl_name['blist_name'];
                     $book_name = $this->getBooksInfo($row['bid']);
                     $book_name = $book_name['book_name'];
                     array_push($result, array(
+                        'rid'=>$row['rid'],
+                        'uid'=>$row['uid'],
                         'realname'=>$this->getName($row['uid']),
                         'book_name'=>$book_name,
                         'booklist_name'=>$bl_name,
@@ -188,8 +189,25 @@
         public function exportReserveListXLS(){
 
         }
-        public function paid_money(){
-
+        public function paid_money($rid, $paid){
+            $sth = $this->db->prepare('update `book_reserve` SET `paid_money` = :paid where `rid` = :rid');
+            $reserveInfo = $this->getReserveInfo($rid);
+            if(!$reserveInfo){
+                throw new Exception("無此項目存在");
+                return 0;
+            }else{
+                $sth->execute(array(
+                    ':rid'=>$rid,
+                    ':paid'=> $paid
+                ));
+                return 1;
+            }
+            
+        }
+        public function getReserveInfo($rid){
+            $sth = $this->db->prepare('select * from `book_reserve` where `rid` = :rid');
+            $sth->execute(array(':rid'=>$rid));
+            return $sth->fetch(PDO::FETCH_ASSOC);
         }
         public function isBookListExist($blid){
             $sth = $this->db->prepare('select count(`blid`) from `booklist` where `blid` = :blid');
