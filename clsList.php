@@ -25,7 +25,8 @@ include('template/function.php');
               $text = json_decode(post('control/book.php',array('user_data'=>$_SESSION['user_data'],'cmd'=>'getBookListInfo','blid'=>$_GET['blid'])),1);
               
             ?>
-            <h3><a href="clsBook.php?blid=<?=$_GET['blid']?>"><?=$text['blist_name']?></a></h3>
+            <h3><a href="clsBook.php?blid=<?=$_GET['blid']?>"><?=$text['blist_name']?></a><a class="btn btn-success pull-right" href="viewBL.php?blid=<?=$_GET['blid']?>">分享連結</a></h3>
+            
             <table class="table table-bordered table-hover">
                 <thead>
                   <tr>

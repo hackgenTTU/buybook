@@ -63,7 +63,7 @@ include('template/function.php');
 		      		
 		      		foreach ($text as $row) {
       			?>
-      				<a href="#" class="list-group-item">
+      				<a href="viewBL.php?blid=<?=$row['blid']?>" class="list-group-item">
       				  <h4 class="list-group-item-heading"><?=$row['blist_name']?></h4>
       				  <p class="list-group-item-text pull-right"><?=$row['blist_desc']?></p>
       				  <div class="clearfix"></div>
