@@ -22,7 +22,7 @@
       </ul>
       
         <?php
-            if((@$_SESSION['user_data'])!=null){
+            if(@$_SESSION['user_data']['password']!=''){
                 ?>
                 <ul class="nav navbar-nav pull-right">
                   <li class="dropdown">

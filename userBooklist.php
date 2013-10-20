@@ -1,9 +1,7 @@
-
 <?php
 include('template/init.php');
 include('template/function.php');
-?>
-<!DOCTYPE html>
+?><!DOCTYPE html>
 <html lang="zh">
 
 <head>

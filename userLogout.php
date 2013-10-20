@@ -1,9 +1,7 @@
-
 <?php
 include('template/init.php');
 include('template/function.php');
-?>
-<!DOCTYPE html>
+?><!DOCTYPE html>
 <html lang="zh">
 	<head>
 		<?php
@@ -18,7 +16,7 @@ include('template/function.php');
 		  <div class="alert alert-success">
 		  	<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
 		  	<?php
-		  		$_SESSION = NULL;
+		  		session_destroy();
 		  		
 		  	?>
 		  	<strong><h3>您已經登出，即將轉入首頁！</h3></strong>
