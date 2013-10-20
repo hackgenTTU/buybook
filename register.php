@@ -18,7 +18,7 @@ include('template/function.php');
 			    <div class="col-lg-2"></div>
 			      <!-- Example row of columns -->
 			    <div class="col-lg-8">
-			      <form class="form-horizontal" action="control/user.php" method="post">
+			      <form class="form-horizontal" action="control/user.php" method="post" onsubmit="return chkPW();">
 			      	<input type="hidden" name="cmd" value="signin">
 			      	<input type="hidden" name="key" value=<?php echo key_gen();?>>
 	                <fieldset>
@@ -58,7 +58,7 @@ include('template/function.php');
 		              </div>
 	                  <div class="form-group">
 	                    <div class="pull-right">
-	                      <button type="submit" class="btn btn-primary" onclick="javascript:(function(){if($('#confrimPassword').val() != $('#inputPassword').val()) alert('兩次輸入的密碼不一樣！');})();">註冊</button> 
+	                      <button type="submit" class="btn btn-primary">註冊</button> 
 	                      <button class="btn btn-default">取消</button> 
 	                    </div>
 	                  </div>
@@ -81,5 +81,14 @@ include('template/function.php');
 	    <!-- Placed at the end of the document so the pages load faster -->
 	    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 	    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+	    <script type="text/javascript">
+	    	function chkPW() {
+	    		if ($('#confrimPassword').val() != $('#inputPassword').val()) {
+	    			alert('兩次輸入並不相同，請確認密碼正確');
+	    			return false;
+	    		}
+	    		return true;
+	    	}
+	    </script>
 	</body>
 </html>
