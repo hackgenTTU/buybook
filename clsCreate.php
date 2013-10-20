@@ -1,58 +1,17 @@
+
+<?php
+include('template/init.php');
+include('template/function.php');
+?>
 <!DOCTYPE html>
 <html lang="zh">
 	<head>
-		<meta charset="utf-8">
-	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	    <meta name="keywords" content="訂書系統'學生'系統">
-	    <meta name="description" content="">
-	    <meta name="author" content="">
-		<title>建立書單清單 - 聽風：書呢？</title>
-		<!-- Bootstrap core CSS -->
-		<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
-		<link rel="stylesheet" type="text/css" href="css/style.css">
-		<!-- Custom styles for this template -->
+		<?php include('template/head.php'); ?>  
 		<style type="text/css">@import url(http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css);</style> 
 	
 	</head>
 	<body>
-	    <div class="navbar navbar-inverse navbar-fixed-top">
-	      <div class="container">
-	        <div class="navbar-header">
-	          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-	            <span class="icon-bar"></span>
-	            <span class="icon-bar"></span>
-	            <span class="icon-bar"></span>
-	          </button>
-	          <a class="navbar-brand" href="index.html">聽風者訂書系統</a>
-	        </div>
-	        <div class="navbar-collapse collapse">
-	          <ul class="nav navbar-nav">
-	            
-	            <li class="dropdown">
-	              <a href="#" class="dropdown-toggle" data-toggle="dropdown">書單 <b class="caret"></b></a>
-	              <ul class="dropdown-menu">
-	                <li class="dropdown-header">書單功能</li>
-	                <li><a href="clsCreate.html">建立書單</a></li>
-	                <li><a href="userBooklist.html">我的書單</a></li>
-	              </ul>
-	            </li>
-	            <!--<li><a href="#">金融計算</a></li>
-	            <li><a href="#">書籍查詢</a></li>-->
-	            <li><a href="about.html">關於</a></li>
-	          </ul>
-	          <form class="navbar-form navbar-right">
-	            <div class="form-group">
-	              <input type="text" placeholder="Email" class="form-control">
-	            </div>
-	            <div class="form-group">
-	              <input type="password" placeholder="Password" class="form-control">
-	            </div>
-	            <button type="submit" class="btn btn-success">登入</button>
-	            <a href="register.html"><button type="button" class="btn btn-warning">註冊</button></a>
-	          </form>
-	        </div><!--/.navbar-collapse -->
-	      </div>
-	    </div>
+	    <?php include('template/menu.php'); ?>
 	    <div class="container marketing">
 	    <hr class="featurette-divider">
 	    <br /><br />

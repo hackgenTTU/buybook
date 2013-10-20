@@ -1,77 +1,18 @@
+
+<?php
+include('template/init.php');
+include('template/function.php');
+?>
 <!DOCTYPE html>
 <html lang="zh">
 
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="keywords" content="訂書系統'學生'系統">
-  <meta name="description" content="">
-  <meta name="author" content="">
-  <title>帳號 - 聽風：書呢？</title>
-  <!-- Bootstrap core CSS -->
-  <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
-  <link rel="stylesheet" type="text/css" href="css/style.css">
-  <!-- Custom styles for this template -->
+  <?php include('template/head.php'); ?>  
 
 </head>
 
 <body>
-  <div class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="index.html">聽風者訂書系統</a>
-      </div>
-      <div class="navbar-collapse collapse">
-        <ul class="nav navbar-nav">
-          <li><a href="about.html">關於</a></li>
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">書單 <b class="caret"></b></a>
-            <ul class="dropdown-menu">
-              <li class="dropdown-header">班級</li>
-              <li><a href="clsCreate.html">建立書單</a></li>
-              <li><a href="clsList.html">班級報表</a></li>
-              <li class="divider"></li>
-              <li class="dropdown-header">書籍</li>
-              <li><a href="#">書籍報表</a></li>
-              <li><a href="#">書籍團購</a></li>
-            </ul>
-          </li>
-          <li><a href="contact.html">聯絡我們</a></li>
-        </ul>
-        <form class="navbar-form navbar-right">
-          <div class="form-group">
-            <input type="text" placeholder="Email" class="form-control">
-          </div>
-          <div class="form-group">
-            <input type="password" placeholder="Password" class="form-control">
-          </div>
-          <button type="submit" class="btn btn-success">登入</button>
-          <a href="register.html">
-            <button type="button" class="btn btn-warning">註冊</button>
-          </a>
-        </form>
-        <ul class="nav navbar-nav pull-right">
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">會員 <b class="caret"></b></a>
-            <ul class="dropdown-menu">
-              <li class="dropdown-header">會員資料</li>
-              <li><a href="userAccount.html">我的資料</a></li>
-              <li><a href="userBooklist.html">我的書單</a></li>
-              <li><a href="userEmail.html">我的信箱</a></li>
-              <li class="divider"></li>
-              <li><a href="userLogout.html">系統登出</a></li>
-            </ul>
-          </li>
-        </ul>
-      </div>
-      <!--/.navbar-collapse -->
-    </div>
-  </div>
+  <?php include('template/menu.php'); ?>
   <br />
   <div class="container marketing">
     <div class="row">
@@ -80,10 +21,10 @@
         <div class="row">
           <div class="col-lg-2">
             <ul class="nav nav-pills nav-stacked" style="max-width: 300px;">
-              <li class="active"><a href="userAccount.html">我的資料</a></li>
-              <li><a href="userBooklist.html">我的書單</a></li>
-              <li><a href="userEmail.html">我的信箱</a></li>
-              <li><a href="userLogout.html">系統登出</a></li>
+              <li class="active"><a href="userAccount.php">我的資料</a></li>
+              <li><a href="userBooklist.php">我的書單</a></li>
+              <li><a href="userEmail.php">我的信箱</a></li>
+              <li><a href="userLogout.php">系統登出</a></li>
             </ul>
           </div>
           <div class="col-lg-6">

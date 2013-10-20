@@ -195,12 +195,13 @@
                 throw new Exception('不存在此用戶');
                 return 0;
             }else{
+                
                 if($this->hash($passwd) != $cur_passwd){
                     throw new Exception('密碼錯誤');
                     
                     return 0;
                 }else{
-                    return getUserData($this->usernm2uid($usernm));
+                    return $this->getUserData($this->usernm2uid($usernm));
                 }
             }
 

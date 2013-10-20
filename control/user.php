@@ -1,33 +1,37 @@
 <?php
+    session_start();
     include('sql.php');
     include('load_module.php');
+    include('../module/functions.php');
+    $user = new User($db);
 
-    $book = new Book($db);
+    if(isset($_SESSION['key'])){
+        if($_SESSION['key'] != key_gen()){
+            die('金鑰錯誤');
+        }
+    }
 
-    var_dump($book->getBookListByUID(15,11,20));
-    /*var_dump($book->addBookList('聽風的書單11','測試用的書單',15,'2014/10/10',array(
-        array(
-            'name'=>'Applied Cal1',
-            'author'=>'berkey',
-            'isbn'=>'1234567890',
-            'price'=>'399',
-            'publisher'=>'bb',
-            
-        ),array(
-            'name'=>'Applied Cal2',
-            'author'=>'berkey',
-            'isbn'=>'1234567890',
-            'price'=>'399',
-            'publisher'=>'bb',
-            
-        ),array(
-            'name'=>'Applied Cal3',
-            'author'=>'berkey',
-            'isbn'=>'1234567890',
-            'price'=>'399',
-            'publisher'=>'bb',
-            
-        )
-    )));*/
+    if($_POST['cmd'] == 'login'){
+        try {
+            $result = $user->login($_POST['usernm'],$_POST['passwd']);
+            $_SESSION['user_data'] = $result;
+        } catch (Exception $e) {
+            $_SESSION['msg'] = $e->getMessage();
+        }
+        
+        go('../index.php',$db);
+    }
+
+    if($_POST['cmd'] == 'signin'){
+        
+        try {
+            $user->addUser($_POST['usernm'],$_POST['passwd'],$_POST['re_passwd'],$_POST['realname']);
+            $_SESSION['msg']='註冊成功';
+        } catch (Exception $e) {
+            $_SESSION['msg'] = $e->getMessage();
+        }
+        go('../index.php',$db);
+        
+    }
 
 ?>
