@@ -13,7 +13,7 @@
             return $result;
 
         }
-        public function getBookListByUID($uid, $start, $end){
+        public function getBookListByUID($uid, $start=0, $end=9){
             $sth = $this->db->prepare('select * from `booklist` where `uid`=:uid limit :start, :end');
             $sth->bindValue(':start',$start,PDO::PARAM_INT);
             $sth->bindValue(':end',$end,PDO::PARAM_INT);
@@ -60,12 +60,11 @@
                 $blid = $this->db->lastInsertId();
                 $bid_array = array();
                 foreach ($book_data as $book) {
-                    $sth = $this->db->prepare('insert into `books`(`blid`, `book_name`, `book_author`, `isbn`, `price`, `publisher`) values (:blid, :book_name, :book_author, :isbn, :price, :publisher)');
+                    $sth = $this->db->prepare('insert into `books`(`blid`, `book_name`, `book_author`, `price`, `publisher`) values (:blid, :book_name, :book_author, :price, :publisher)');
                     $sth->execute(array(
                         ':blid'=>$blid,
                         ':book_name'=>$book['name'],
                         ':book_author'=>$book['author'],
-                        ':isbn'=>$book['isbn'],
                         ':price'=>$book['price'],
                         ':publisher'=>$book['publisher']
                     ));
@@ -79,6 +78,9 @@
             
         }
         public function editBookList(){
+
+        }
+        public function delBookList(){
 
         }
         public function getBookListStatus($blid){
@@ -102,7 +104,7 @@
             }
             
         }
-        public function reserveBook($uid, $bid, $blid, $num){
+        public function reserveBook($uid, $bid, $blid, $num=1){
             
             if($this->checkUidExist($uid)){
                 if($this->isBookListExist($blid)){
@@ -111,8 +113,9 @@
                         ':bid'=>$bid,
                         ':blid'=>$blid
                     ));
+                    
                     $result = $sth->fetch(PDO::FETCH_ASSOC);
-                    if((int)$result['count(`book_name`)'] == 1){
+                    if($result['count(`book_name`)'] == '1'){
                         $sth = $this->db->prepare('insert into `book_reserve`(`uid`, `bid`, `blid`, `num`, `price`,`total_price`) values (:uid, :bid, :blid, :num, :price, :total_price)');        
                         $sth->execute(array(
                             ':uid'=>$uid,

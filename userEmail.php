@@ -15,21 +15,18 @@ include('template/function.php');
   <div class="container marketing">
     <div class="row">
       <div class="col-lg-12">
-        <legend>註冊</legend>
+        <br>
+        <br>
+        <br>
         <div class="row">
           <div class="col-lg-2">
-            <ul class="nav nav-pills nav-stacked" style="max-width: 300px;">
-              <li><a href="userAccount.php">我的資料</a></li>
-              <li><a href="userBooklist.php">我的書單</a></li>
-              <li class="active"><a href="userEmail.php">我的信箱</a></li>
-              <li><a href="userLogout.php">系統登出</a></li>
-            </ul>
+            <?php include('template/sidebar.php'); ?>
           </div>
           <div class="col-lg-10">
-            <div class="alert alert-warning">
-              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-              <strong>請進行信箱認證</strong> 未認證信箱可能導致部分服務無法正常運行...
-            </div>
+            <br>
+            <br>
+            <br>
+            <legend>註冊</legend>
             <form class="form-horizontal">
               <fieldset>
                 <div class="form-group">

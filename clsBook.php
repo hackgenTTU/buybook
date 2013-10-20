@@ -18,28 +18,25 @@ include('template/function.php');
         <legend>註冊</legend>
         <div class="row">
           <div class="col-lg-2">
-            <ul class="nav nav-pills nav-stacked" style="max-width: 300px;">
-              <li><a href="userAccount.php">我的資料</a></li>
-              <li class="active"><a href="userBooklist.php">我的書單</a></li>
-              <li><a href="userEmail.php">我的信箱</a></li>
-              <li><a href="userLogout.php">系統登出</a></li>
-            </ul>
+            <?php include('template/sidebar.php'); ?>
           </div>
           <div class="col-lg-10">
-            <div class="alert alert-info">
-              <strong>書本名稱：</strong><p>Linux 企業現場應用系統｜網路管理 x 訊息管理 x 私有雲建置 x 協同作業平台</p>
-              <strong>書本價格：</strong><p>NT$1,001</p>
-              <strong>截止日期：</strong><p>2111/11/11</p>
-            </div>
+            <?php
+              $text = json_decode(post('control/book.php',array('cmd'=>'getbookdata','blid'=>$_GET['blid'])),1);       
+            ?>
+            
             <div class="btn-group" data-toggle="buttons" style="margin: 9px auto;">
-              <label class="btn btn-primary btn-warning">
+              <label class="btn btn-default">
                 <input type="checkbox"> 列印表單
               </label>
-              <label class="btn btn-primary btn-warning">
+              <label class="btn btn-default">
                 <input type="checkbox"> 關閉表單
               </label>
-              <label class="btn btn-primary btn-warning">
+              <label class="btn btn-default">
                 <input type="checkbox"> 刪除表單
+              </label>
+              <label class="btn btn-default">
+                <input type="checkbox"> 切換統計模式
               </label>
             </div>
             <table class="table table-bordered table-hover">
@@ -47,65 +44,50 @@ include('template/function.php');
                   <tr>
                     <th>#</th>
                     <th>姓名</th>
-                    <th>繳交狀態</th>
-                    <th>繳交金額</th>
-                    <th>是否付款</th>
+                    <th>書名</th>
+                    <th>數量</th>
+                    <th>單價</th>
+                    <th>總額</th>
+                    <th>已付</th>
+                    
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>1</td>
-                    <td>丁曉明</td>
-                    <td>未繳款</td>
-                    <td>0</td>
-                    <td><input type="checkbox"></td>
-                  </tr>
-                  <tr>
-                    <td>2</td>
-                    <td>黑鼠大</td>
-                    <td>未繳款</td>
-                    <td>0</td>
-                    <td><input type="checkbox"></td>
-                  </tr>
-                  <tr>
-                    <td>3</td>
-                    <td>大黑鼠</td>
-                    <td>已繳款</td>
-                    <td>1,010</td>
-                    <td><input type="checkbox" checked></td>
-                  </tr>
-                  <tr>
-                    <td>4</td>
-                    <td>鼠大黑</td>
-                    <td>未繳款</td>
-                    <td>0</td>
-                    <td><input type="checkbox"></td>
-                  </tr>
-                  <tr>
-                    <td>5</td>
-                    <td>黑大鼠</td>
-                    <td>已繳款</td>
-                    <td>1,100</td>
-                    <td><input type="checkbox" checked></td>
-                  </tr>
-                  <tr>
-                    <td>6</td>
-                    <td>大鼠黑</td>
-                    <td>未繳款</td>
-                    <td>0</td>
-                    <td><input type="checkbox"></td>
-                  </tr>
+                  <?php
+                 
+                    $i = 0;
+                    foreach ($text as $row) {
+                      $i++;
+                        ?>
+                        <tr>
+                          <td><?=$i?></td>
+                          <td><?=$row['realname']?></td>
+                          <td><?=$row['book_name']?></td>
+                          <td><?=$row['num']?></td>
+                          <td><?=$row['price']?></td>
+                          <td><?=$row['total_price']?></td>
+                          <td><?=$row['paid_money']?></td>
+                          
+                        </tr>
+                        <?php
+                    }
+                  ?>
+                  
+                  
                 </tbody>
             </table>
-            <div class="btn-group" data-toggle="buttons" style="margin: -9px auto;">
-              <label class="btn btn-primary btn-warning">
+            <div class="btn-group" data-toggle="buttons" style="margin: 9px auto;">
+              <label class="btn btn-default">
                 <input type="checkbox"> 列印表單
               </label>
-              <label class="btn btn-primary btn-warning">
+              <label class="btn btn-default">
                 <input type="checkbox"> 關閉表單
               </label>
-              <label class="btn btn-primary btn-warning">
+              <label class="btn btn-default">
                 <input type="checkbox"> 刪除表單
+              </label>
+              <label class="btn btn-default">
+                <input type="checkbox"> 切換統計模式
               </label>
             </div>
             <div class="row">

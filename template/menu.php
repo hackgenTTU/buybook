@@ -6,7 +6,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="index.php">聽風者訂書系統</a>
+      <a class="navbar-brand" href="index.php">大學訂書系統</a>
     </div>
     <div class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
@@ -42,7 +42,7 @@
                 ?>
                 <form class="navbar-form navbar-right" action="control/user.php" method="post">
                   <div class="form-group">
-                    <input type="text" placeholder="Email" name="usernm" class="form-control">
+                    <input type="text" placeholder="Username" name="usernm" class="form-control">
                   </div>
                   <div class="form-group">
                     <input type="password" placeholder="Password" name="passwd" class="form-control">

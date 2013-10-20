@@ -5,12 +5,13 @@ include('template/function.php');
 <html lang="zh">
 
 <head>
-  <?php include('template/head.php'); ?>  
+  <?php include('template/head.php'); ?>
+  <!-- Custom styles for this template -->
 
 </head>
 
 <body>
-  <?php include('template/menu.php'); ?>
+  <?php include('template/menu.php');?>
   <br />
   <div class="container marketing">
     <div class="row">
@@ -25,40 +26,43 @@ include('template/function.php');
               $text = json_decode(post('control/book.php',array('user_data'=>$_SESSION['user_data'],'cmd'=>'getBookListInfo','blid'=>$_GET['blid'])),1);
               
             ?>
-            <h3><a href="clsBook.php?blid=<?=$_GET['blid']?>"><?=$text['blist_name']?></a></h3>
-            <table class="table table-bordered table-hover">
+            <h3><?=$text['blist_name']?></h3>
+            <form action="control/book.php" method="post">
+              <input type="hidden" name="cmd" value="reserveBook">
+              <input type="hidden" name="key" value="<?=key_gen();?>">
+              <input type="hidden" name="blid" value="<?=$_GET['blid']?>">
+
+              <table class="table table-bordered table-hover">
                 <thead>
                   <tr>
-                    <th>#</th>
-                    <th>書名</th>
-                    <th>作者</th>
-                    <th>價格</th>
-                    <th>出版社</th>
+                    <th class="col-md-1">購買</th>
+                    <th class="col-md-6">書名</th>
+                    <th class="col-md-2">作者</th>
+                    <th class="col-md-1">價格</th>
+                    <th class="col-md-2">出版社</th>
                   </tr>
                 </thead>
-                <?php
-                  $text = json_decode(post('control/book.php',array('user_data'=>$_SESSION['user_data'],'cmd'=>'getBookListDetail','blid'=>$_GET['blid'])),1);
-                  
-                ?>
                 <tbody>
                   <?php
-                    $i=0;
+                    $text = json_decode(post('control/book.php',array('cmd'=>'getBookListDetail','blid'=>$_GET['blid'])),1);
+                    
                     foreach ($text as $row) {
-                      $i++;
                       ?>
-                        <tr>
-                          <td><?=$i?></td>
-                          <td><?=$row['book_name']?></td>
-                          <td><?=$row['book_author']?></td>
-                          <td><?=$row['price']?></td>
-                          <td><?=$row['publisher']?></td>
-                        </tr>    
+                      <tr>
+                        <td><input type="checkbox" name="bid[]" value="<?=$row['bid']?>"></td>
+                        <td><?=$row['book_name']?></td>
+                        <td><?=$row['book_author']?></td>
+                        <td><?=$row['price']?></td>
+                        <td><?=$row['publisher']?></td>
+                      </tr>
                       <?
                     }
                   ?>
                   
                 </tbody>
             </table>
+              <input type="submit" value="購買" class="btn btn-primary col-md-2 col-md-offset-5">
+            </form>
             
             
         </div>

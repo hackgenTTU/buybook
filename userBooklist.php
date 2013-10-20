@@ -18,12 +18,7 @@ include('template/function.php');
         <legend>註冊</legend>
         <div class="row">
           <div class="col-lg-2">
-            <ul class="nav nav-pills nav-stacked" style="max-width: 300px;">
-              <li><a href="userAccount.php">我的資料</a></li>
-              <li class="active"><a href="userBooklist.php">我的書單</a></li>
-              <li><a href="userEmail.php">我的信箱</a></li>
-              <li><a href="userLogout.php">系統登出</a></li>
-            </ul>
+            <?php include('template/sidebar.php'); ?>
           </div>
           <div class="col-lg-10">
             <div class="row">
@@ -34,79 +29,72 @@ include('template/function.php');
                 <div class="alert alert-danger"><strong>未關閉表單：</strong> 4</div>
               </div>
             </div>
-            <div class="btn-group" data-toggle="buttons" style="margin: 9px auto;">
-              <label class="btn btn-primary btn-warning">
-                <input type="checkbox"> 關閉表單
-              </label>
-              <label class="btn btn-primary btn-warning">
-                <input type="checkbox"> 刪除表單
-              </label>
+            <div class="col-md-4" style="margin-bottom:20px;">
+              <div class="btn-group" data-toggle="buttons" style="margin: -9px auto;">
+                <label class="btn btn-default">
+                   關閉表單
+                </label>
+                <label class="btn btn-default">
+                   刪除表單
+                </label>
+              </div>
+              <div class="btn-group" data-toggle="buttons" style="margin: -9px auto;">
+              <a href="clsCreate.php">
+                <label class="btn btn-primary">
+                   新增表單
+                </label>
+              </a>
+              </div>
+
             </div>
+
             <table class="table table-bordered table-hover">
-                <thead>
-                  <tr>
-                    <th>#</th>
-                    <th>書單</th>
-                    <th>建立日期</th>
-                    <th>截止日期</th>
-                    <th>狀態</th>
-                  </tr>
-                </thead>
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>書單</th>
+                  <th>建立日期</th>
+                  <th>截止日期</th>
+                  <th>狀態</th>
+                </tr>
+              </thead>
                 <tbody>
-                  <tr>
-                    <td><input type="checkbox" value=""></td>
-                    <td><a href="clsList.php">第一好書單</a></td>
-                    <td>2111/11/07</td>
-                    <td>2111/11/11</td>
-                    <td>未關閉</td>
-                  </tr>
-                  <tr>
-                    <td><input type="checkbox" value=""></td>
-                    <td>水母好ㄘ</td>
-                    <td>2033/12/12</td>
-                    <td>2033/12/29</td>
-                    <td>未關閉</td>
-                  </tr>
-                  <tr>
-                    <td><input type="checkbox" value=""></td>
-                    <td>MACafee</td>
-                    <td>2013/10/19</td>
-                    <td>2013/10/20</td>
-                    <td>未關閉</td>
-                  </tr>
-                  <tr>
-                    <td><input type="checkbox" value=""></td>
-                    <td>使黃資握</td>
-                    <td>2013/09/12</td>
-                    <td>2013/10/19</td>
-                    <td>未關閉</td>
-                  </tr>
-                  <tr class="success">
-                    <td><input type="checkbox" value=""></td>
-                    <td>超級無敵螢幕x4</td>
-                    <td>2013/10/20</td>
-                    <td>2013/10/21</td>
-                    <td>已關閉</td>
-                  </tr>
-                  <tr class="success">
-                    <td><input type="checkbox" value=""></td>
-                    <td>節歌不要</td>
-                    <td>1990/2/1</td>
-                    <td>1990/2/29</td>
-                    <td>已關閉</td>
-                  </tr>
+                <?php
+                  $text = json_decode(post('control/book.php',array('user_data'=>$_SESSION['user_data'],'cmd'=>'getBookListByUID')),1);
+                  foreach ($text as $row) {
+                    ?>
+                    <tr>
+                      <td><input type="checkbox" name="blid[]" value="<?=$row['blid']?>"></td>
+                      <td><a href="clsList.php?blid=<?=$row['blid']?>"><?=$row['blist_name']?></a></td>
+                      <td><?=$row['created_at']?></td>
+                      <td><?=$row['deadline']?></td>
+                      <td><?=$row['status']?></td>
+                    </tr>
+                    <?php
+                  }
+                ?>
                 </tbody>
             </table>
-            <div class="btn-group" data-toggle="buttons" style="margin: -9px auto;">
-              <label class="btn btn-primary btn-warning">
-                <input type="checkbox"> 關閉表單
-              </label>
-              <label class="btn btn-primary btn-warning">
-                <input type="checkbox"> 刪除表單
-              </label>
-            </div>
-            <div class="row">
-            <div class="col-md-4 col-md-offset-4">
+            <div class="col-md-5">
+              <div class="btn-group" data-toggle="buttons" style="margin: -9px auto;">
+                <label class="btn btn-default">
+                  關閉表單
+                </label>
+                <label class="btn btn-default">
+                  刪除表單
+                </label>
+              </div>
+              <div class="btn-group" data-toggle="buttons" style="margin: -9px auto;">
+                
+                <a href="clsCreate.php">
+                <label class="btn btn-primary">
+                   新增表單
+                </label>
+              </a>
+              </div>
+            </div>   
+            
+            <div class="col-md-4">
               <ul class="pagination" style="margin: 0 auto;">
                 <li><a href="#">&laquo;</a></li>
                 <li><a href="#">1</a></li>
@@ -115,7 +103,7 @@ include('template/function.php');
                 <li><a href="#">&raquo;</a></li>
               </ul>
             </div>
-            </div>
+           
         </div>
       </div>
     </div>

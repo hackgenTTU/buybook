@@ -33,5 +33,10 @@
         go('../index.php',$db);
         
     }
+    if($_POST['cmd'] == 'getUserData' AND isset($_POST['user_data'])){
+        echo json_encode($user->getUserData($_POST['user_data']['uid']));
+    }
+    
+    
 
 ?>

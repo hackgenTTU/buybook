@@ -15,21 +15,25 @@ include('template/function.php');
 	    <br /><br />
 	    <!-- Main jumbotron for a primary marketing message or call to action -->
 		    <div class="row">
-		    	<div class="col-lg-2"></div>
+		    	<div class="col-lg-2">
+		    		<?php include('template/sidebar.php'); ?>
+		    	</div>
 			    <div class="col-lg-8">
-			      <form class="form-horizontal">
+			      <form class="form-horizontal form" action="control/book.php" method="post">
+			      	<input type="hidden" name="key" value="<?php echo key_gen(); ?>">
+			      	<input type="hidden" name="cmd" value="createBookList">
 	                <fieldset>
 	                  <legend>建立書單</legend>
 	                  <div class="form-group">
 	                    <label for="listName" class="col-lg-2 control-label">書單名稱</label>
 	                    <div class="col-lg-10">
-	                      <input type="text" class="form-control" id="listName" placeholder="List Name" required>
+	                      <input type="text" name="bl_name" class="form-control" id="listName" placeholder="List Name" required>
 	                    </div>
 	                  </div>
 	                  <div class="form-group">
 	                    <label for="bookLimit" class="col-lg-2 control-label">截止日期</label>
 	                    <div class="col-lg-10">
-	                      <input type="text" class="form-control" id="datepicker" placeholder="2013/10/20" required>
+	                      <input type="text" name="deadline" class="form-control" id="datepicker" placeholder="2013/10/20" required>
 	                    </div>
 	                  </div>
 	                  <legend>第1本書</legend>
@@ -37,19 +41,25 @@ include('template/function.php');
 	                  <div class="form-group">
 	                    <label for="bookName" class="col-lg-2 control-label">書本名稱</label>
 	                    <div class="col-lg-10">
-	                      <input type="text" class="form-control" id="bookName" placeholder="Book Name" required>
+	                      <input type="text" name="book_name[]" class="form-control" id="bookName" placeholder="Book Name" required>
 	                    </div>
 	                  </div>
 	                  <div class="form-group">
 	                    <label for="bookPrice" class="col-lg-2 control-label">書本價格</label>
 	                    <div class="col-lg-10">
-	                      <input type="text" class="form-control form-warring" id="bookPrice" placeholder="$$$" required>
+	                      <input type="text" name="book_price[]" class="form-control form-warring" id="bookPrice" placeholder="$$$" required>
 	                    </div>
 	                  </div>
 	                  <div class="form-group">
-	                    <label for="bookISBN" class="col-lg-2 control-label">ISBN</label>
+	                    <label for="bookISBN" class="col-lg-2 control-label">作者</label>
 	                    <div class="col-lg-10">
-	                      <input type="text" class="form-control" id="bookISBN" placeholder="ISBN (option)">
+	                      <input type="text" name="author[]" class="form-control" id="bookAuthor" placeholder="Author (option)">
+	                    </div>
+	                  </div>
+	                  <div class="form-group">
+	                    <label for="bookISBN" class="col-lg-2 control-label">出版社</label>
+	                    <div class="col-lg-10">
+	                      <input type="text" name="publisher[]" class="form-control" id="bookPublisher" placeholder="Publisher (option)">
 	                    </div>
 	                  </div>
 	                  </div>
