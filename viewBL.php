@@ -23,7 +23,7 @@ include('template/function.php');
           </div>
           <div class="col-lg-10">
             <?php
-              $text = json_decode(post('control/book.php',array('user_data'=>$_SESSION['user_data'],'cmd'=>'getBookListInfo','blid'=>$_GET['blid'])),1);
+              $text = json_decode(post('control/book.php',array('user_data'=>@$_SESSION['user_data'],'cmd'=>'getBookListInfo','blid'=>$_GET['blid'])),1);
               
             ?>
             <h3><?=$text['blist_name']?></h3>

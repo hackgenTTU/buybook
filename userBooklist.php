@@ -21,14 +21,7 @@ include('template/function.php');
             <?php include('template/sidebar.php'); ?>
           </div>
           <div class="col-lg-10">
-            <div class="row">
-              <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                <div class="alert alert-success"><strong>已關閉書單：</strong> 2</div>
-              </div>
-              <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                <div class="alert alert-danger"><strong>未關閉表單：</strong> 4</div>
-              </div>
-            </div>
+            
             <div class="col-md-4" style="margin-bottom:20px;">
               <div class="btn-group" data-toggle="buttons" style="margin: -9px auto;">
                 <label class="btn btn-default">
@@ -39,10 +32,8 @@ include('template/function.php');
                 </label>
               </div>
               <div class="btn-group" data-toggle="buttons" style="margin: -9px auto;">
-              <a href="clsCreate.php">
-                <label class="btn btn-primary">
+              <a href="clsCreate.php" class="btn btn-primary">
                    新增表單
-                </label>
               </a>
               </div>
 
@@ -86,11 +77,7 @@ include('template/function.php');
               </div>
               <div class="btn-group" data-toggle="buttons" style="margin: -9px auto;">
                 
-                <a href="clsCreate.php">
-                <label class="btn btn-primary">
-                   新增表單
-                </label>
-              </a>
+              <a href="clsCreate.php" class="btn btn-primary">新增表單</a>
               </div>
             </div>   
             
