@@ -1,70 +1,10 @@
 <!DOCTYPE html>
 <html lang="zh">
 	<head>
-		<meta charset="utf-8">
-	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	    <meta name="keywords" content="訂書系統'學生'系統">
-	    <meta name="description" content="">
-	    <meta name="author" content="">
-		<title>首頁 - 聽風：書呢？</title>
-		<!-- Bootstrap core CSS -->
-		<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
-		<link rel="stylesheet" type="text/css" href="css/style.css">
-		<!-- Custom styles for this template -->
-	
+		{% include "head.html" %}
 	</head>
 	<body>
-	    <div class="navbar navbar-inverse navbar-fixed-top">
-	      <div class="container">
-	        <div class="navbar-header">
-	          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-	            <span class="icon-bar"></span>
-	            <span class="icon-bar"></span>
-	            <span class="icon-bar"></span>
-	          </button>
-	          <a class="navbar-brand" href="index.html">聽風者訂書系統</a>
-	        </div>
-	        <div class="navbar-collapse collapse">
-	          <ul class="nav navbar-nav">
-	            <li class="dropdown">
-	              <a href="#" class="dropdown-toggle" data-toggle="dropdown">書單 <b class="caret"></b></a>
-	              <ul class="dropdown-menu">
-	                <li class="dropdown-header">書單功能</li>
-	                <li><a href="clsCreate.html">建立書單</a></li>
-	                <li><a href="userBooklist.html">我的書單</a></li>
-	                <li><a href="#">所有書籍</a></li>
-	              </ul>
-	            </li>
-	            <!--<li><a href="#">金融計算</a></li>
-	            <li><a href="#">書籍查詢</a></li>-->
-	            <li><a href="about.html">關於</a></li>
-	          </ul>
-	          <form class="navbar-form navbar-right">
-	            <div class="form-group">
-	              <input type="text" placeholder="Email" class="form-control">
-	            </div>
-	            <div class="form-group">
-	              <input type="password" placeholder="Password" class="form-control">
-	            </div>
-	            <button type="submit" class="btn btn-success">登入</button>
-	            <a href="register.html"><button type="button" class="btn btn-warning">註冊</button></a>
-	          </form>
-	          <ul class="nav navbar-nav pull-right">
-	            <li class="dropdown">
-	              <a href="#" class="dropdown-toggle" data-toggle="dropdown">會員 <b class="caret"></b></a>
-	              <ul class="dropdown-menu">
-		              <li class="dropdown-header">會員資料</li>
-		              <li><a href="userAccount.html">我的資料</a></li>
-		              <li><a href="userBooklist.html">我的書單</a></li>
-		              <li><a href="userEmail.html">我的信箱</a></li>
-		              <li class="divider"></li>
-		              <li><a href="userLogout.html">系統登出</a></li>
-	              </ul>
-	            </li>
-	          </ul>
-	        </div><!--/.navbar-collapse -->
-	      </div>
-	    </div>
+	    {% include "menu.html" %}
 
 	    <!-- Main jumbotron for a primary marketing message or call to action -->
 	    <div class="container marketing">
@@ -150,10 +90,6 @@
 	    </div> <!-- /container -->
 
 
-	    <!-- Bootstrap core JavaScript
-	    ================================================== -->
-	    <!-- Placed at the end of the document so the pages load faster -->
-	    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-	    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+	    {% include "footer.html" %}
 	</body>
 </html>
