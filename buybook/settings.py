@@ -36,6 +36,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'booking',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -99,3 +100,5 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.tz",
     "django.contrib.messages.context_processors.messages"
 )
+
+SESSION_SAVE_EVERY_REQUEST = True

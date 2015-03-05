@@ -1,89 +1,100 @@
 <!DOCTYPE html>
 <html lang="zh">
-	<head>
-	{% include "head.html" %}
-	
-	</head>
-	<body>
-		{% include "menu.html" %}
-	    
-	    <div class="container marketing">
-	    <hr class="featurette-divider">
-	    <br />
-	    <br />
-	    <!-- Main jumbotron for a primary marketing message or call to action -->
-		    <div class="row">
-			    <div class="col-lg-2"></div>
-			      <!-- Example row of columns -->
-			    <div class="col-lg-8">
-			      <form class="form-horizontal" action="register.html" method="post">
-	                <fieldset>
-	                  <legend>註冊</legend>
-	                  <div class="form-group">
-	                    <label for="inputUser" class="col-lg-2 control-label">使用者名稱</label>
-	                    <div class="col-lg-10">
-	                      <input type="text" class="form-control" id="inputUser" name="username" placeholder="User Name" required>
-	                    </div>
-	                  </div>
-	                  <div class="form-group">
-	                    <label for="inputPassword" class="col-lg-2 control-label">輸入密碼</label>
-	                    <div class="col-lg-10">
-	                      <input type="password" class="form-control" id="inputPassword" name="password1" placeholder="Password" required>
-	                    </div>
-	                  </div>
-	                  <div class="form-group">
-	                    <label for="confrimPassword" class="col-lg-2 control-label">確認密碼</label>
-	                    <div class="col-lg-10">
-	                      <input type="password" class="form-control form-warring" id="confrimPassword" name="password2" placeholder="Confirm Password" required>
-	                    </div>
-	                  </div>
-	                  <div class="form-group">
-	                    <label for="inputName" class="col-lg-2 control-label">真實姓名</label>
-	                    <div class="col-lg-10">
-	                      <input type="text" class="form-control" id="inputName" name="lastname" placeholder="Real Name" required>
-	                    </div>
-	                  </div>
-	                  <!--
-	                  <div class="form-group">
-	                    <label for="inputEmail" class="col-lg-2 control-label">校內信箱</label>
-	                    <div class="col-lg-10">
-	                      <input type="text" class="form-control" id="inputEmail" placeholder="Email">
-	                    </div>
-	                  </div>
-	                  -->
-	                  <div class="form-group">
-	                    <label for="inputClassNum" class="col-lg-2 control-label">班級</label>
-	                    <div class="col-lg-10">
-	                      <input type="text" class="form-control" id="inputClassNum" placeholder="Class Number (Option)">
-	                    </div>
-	                  </div>
-	                  <div class="form-group">
-		                <div class="col-lg-10 col-lg-offset-2">
-		              	  <label class="checkbox">
-			                <input type="checkbox" value="agree-me" data-val-mandatory="同意後繼續" required> 同意使用規範
-			              </label>
-		                </div>
-		              </div>
-	                  <div class="form-group">
-	                    <div class="pull-right">
-	                      <button type="submit" class="btn btn-primary" onclick="javascript:(function(){if($('#confrimPassword').val() != $('#inputPassword').val()) alert('兩次輸入的密碼不一樣！');})();">註冊</button> 
-	                      <button class="btn btn-default">取消</button> 
-	                    </div>
-	                  </div>
-	                </fieldset>
-	              </form>
-		        </div>
-		        <div class="col-lg-2"></div>
-		    </div>
+<head>{% include "head.html" %}</head>
+<body>
+    {% include "menu.html" %}
+    <div class="container marketing">
+        <hr class="featurette-divider">
+        <br />
+        <br />
+        <!-- Main jumbotron for a primary marketing message or call to action -->
+        <div class="row">
+            <div class="col-lg-2"></div>
+            <!-- Example row of columns -->
+            <div class="col-lg-8">
+                <form class="form-horizontal" action="register.html" method="post">
+                {% for field in form.visible_fields %}
+                    {% if field.errors %}
+                    <div class="alert alert-danger alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span></button>
+                                <strong>Warning!</strong> {{ field.errors }}
+                    </div>
+                    {% else %}
+                    {% endif %}
+                {% endfor %}
+                {% csrf_token %}
+                    <fieldset>
+                        <legend>註冊</legend>
+                        <div class="form-group">
+                            <label for="id_username" class="col-lg-2 control-label">使用者名稱</label>
+                            <div class="col-lg-10">
+                                <input class="form-control" id="id_username" maxlength="30" name="username" type="text" placeholder="User Name" required></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="id_password1" class="col-lg-2 control-label">輸入密碼</label>
+                            <div class="col-lg-10">
+                                <input class="form-control" id="id_password1" name="password1" type="password" placeholder="Password" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="id_password2" class="col-lg-2 control-label">確認密碼</label>
+                            <div class="col-lg-10">
+                                <input class="form-control form-warring" id="id_password2" name="password2" type="password" placeholder="Confirm Password" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="id_last_name" class="col-lg-2 control-label">姓</label>
+                            <div class="col-lg-10">
+                                <input class="form-control" id="id_last_name" maxlength="30" name="last_name" type="text" placeholder="Last Name" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="id_first_name" class="col-lg-2 control-label">名</label>
+                            <div class="col-lg-10">
+                                <input class="form-control" id="id_first_name" maxlength="30" name="first_name" type="text" placeholder="First Name" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="id_phone_num" class="col-lg-2 control-label">手機</label>
+                            <div class="col-lg-10">
+                                <input class="form-control" id="id_phone_num" maxlength="10" name="phone_num" type="text" placeholder="Phone Num" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="id_email" class="col-lg-2 control-label">校內信箱</label>
+                            <div class="col-lg-10">
+                                <input class="form-control" id="id_email" maxlength="75" name="email" type="email" placeholder="Email" required></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="id_class_num" class="col-lg-2 control-label">班級</label>
+                            <div class="col-lg-10">
+                                <input class="form-control" id="id_class_num" maxlength="100" name="class_num" type="text" placeholder="Class Number (Option)">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-10 col-lg-offset-2">
+                                <label class="checkbox">
+                                    <input type="checkbox" value="agree-me" data-val-mandatory="同意後繼續" required>同意使用規範</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="pull-right">
+                                <button type="submit" class="btn btn-primary" onclick="javascript:(function(){if($('#id_password1').val() != $('#id_password2').val()) alert('兩次輸入的密碼不一樣！');})();">註冊</button>
+                                <button class="btn btn-default">取消</button>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+            <div class="col-lg-2"></div>
+        </div>
 
-	      <hr>
-	      <footer>
-	        <p>&copy; Company 2013</p>
-	        
-	      </footer>
-	    </div> <!-- /container -->
+        <hr>
+        <footer>
+            <p>&copy; Company 2013</p>
 
-
-	    {% include "footer.html" %}
-	</body>
+        </footer>
+    </div>
+    <!-- /container -->{% include "footer.html" %}</body>
 </html>
